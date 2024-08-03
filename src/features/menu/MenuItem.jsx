@@ -3,6 +3,7 @@ import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
 import { addItem, setItemQuantity } from "../cart/CartSlice";
 import DeleteItem from "../../ui/DeleteItem";
+import UpdateItemQuantity from "../../ui/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
@@ -43,7 +44,12 @@ function MenuItem({ pizza }) {
             </p>
           )}
 
-          {isAddedInCart && <DeleteItem pizzaId={id} />}
+          {isAddedInCart && (
+            <div className="flex items-center gap-4">
+              <UpdateItemQuantity pizzaId={id} />
+              <DeleteItem pizzaId={id} />
+            </div>
+          )}
 
           {!soldOut && !isAddedInCart && (
             <Button type="small" onClick={handleAddToCart}>
